@@ -7,7 +7,12 @@ const App = () => {
 
   const addNumber = (event) => {
     event.preventDefault();
-    console.log("button clicked", event.target);
+    if (persons.find((person) => person.person === newName)) {
+      alert(`${newName} is already added to phone book`);
+      setNewName("");
+      return;
+    }
+
     const personObject = {
       person: newName,
       id: newName,
@@ -17,7 +22,6 @@ const App = () => {
   };
 
   const handlePersonChange = (event) => {
-    console.log(event.target.value);
     setNewName(event.target.value);
   };
 
