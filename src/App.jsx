@@ -5,6 +5,7 @@ const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
+  const [newFilter, setNewFilter] = useState("");
 
   const addNumber = (event) => {
     event.preventDefault();
@@ -33,10 +34,23 @@ const App = () => {
     setNewNumber(event.target.value);
   };
 
+  const handleFilterChange = (event) => {
+    setNewFilter(event.target.value);
+    handleObjectFilter(event.target.value);
+  };
+
+  const handleObjectFilter = (props) => {
+    setPersons(persons.filter((person) => person.person.includes(props)));
+  };
+
   return (
     <div>
       <h2>Phone book</h2>
       <form onSubmit={addNumber}>
+        <div>
+          Filter: <input value={newFilter} onChange={handleFilterChange} />
+        </div>
+        <h2>add a new</h2>
         <div>
           name: <input value={newName} onChange={handlePersonChange} />
         </div>
